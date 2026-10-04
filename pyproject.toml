@@ -1,0 +1,22 @@
+[project]
+name = "hlpairs"
+version = "1.0.0"
+description = "Mean-reversion half-life and pairs-trading performance: a GGR (2006) replication and extension"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "numpy", "pandas", "scipy", "statsmodels", "matplotlib", "yfinance",
+  "pyarrow", "pyyaml", "lxml", "jinja2", "requests",
+]
+
+[dependency-groups]
+dev = ["pytest", "jupyter", "nbconvert", "nbformat", "ipykernel"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

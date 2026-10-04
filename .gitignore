@@ -5,3 +5,10 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .superpowers/
+results/cache/
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*.blg
+paper/*.out
+*.egg-info/
