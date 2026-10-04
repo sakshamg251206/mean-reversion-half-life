@@ -1,0 +1,11 @@
+h5:
+  K: 100
+  estimator: hl_ols_63
+  dev_sharpe_net: 0.7311370517876977
+  dev_deflated_sharpe_prob: 0.9893378060757906
+  n_trials: 21
+ou:
+  hold_mult: 3
+  dev_sharpe_net: 0.1230053916734806
+baseline_dev_sharpe_net: 0.36696001610824297
+config_sha256: 4e015ddccc8368301c0f456b1402ec66481f37fdaa380a225985f6bb83cf1b4d
