@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this code or its results, please cite it as below."
+type: software
+title: "Mean-Reversion Half-Life and Pairs-Trading Performance: A Replication and Extension of Gatev, Goetzmann & Rouwenhorst (2006)"
+authors:
+  - family-names: Garg
+    given-names: Saksham
+version: 1.0.0
+date-released: 2026-10-05
+license: MIT
+keywords: [pairs trading, statistical arbitrage, mean reversion, half-life, Ornstein-Uhlenbeck, replication]
+references:
+  - type: article
+    authors:
+      - family-names: Gatev
+        given-names: Evan
+      - family-names: Goetzmann
+        given-names: William N.
+      - family-names: Rouwenhorst
+        given-names: K. Geert
+    title: "Pairs Trading: Performance of a Relative-Value Arbitrage Rule"
+    journal: "Review of Financial Studies"
+    year: 2006
+    volume: 19
+    issue: 3
+    start: 797
+    end: 827
+    doi: 10.1093/rfs/hhj020
+preferred-citation:
+  type: report
+  authors:
+    - family-names: Garg
+      given-names: Saksham
+  title: "Does Faster Mean Reversion Predict Pairs-Trading Profits? Half-Life Evidence from a Replication of Gatev, Goetzmann and Rouwenhorst (2006)"
+  year: 2026
