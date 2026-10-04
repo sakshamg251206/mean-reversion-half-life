@@ -1,0 +1,5 @@
+data: {start: "1999-01-01", end: "2025-12-31"}
+sample: {dev_last_trade_start: "2012-07-01", holdout_first_trade_start: "2013-01-01"}
+engine: {form_months: 12, trade_months: 6, n_candidates: 100, k: 2.0, wait: 0, n_random: 20, n_sector: 20, ou_n: 20, ou_hold_mults: [1, 2, 3], seed: 0}
+costs_bps: [0, 5, 10, 20, 30]
+headline_cost_bps: 10

@@ -60,6 +60,17 @@ def clean_prices(px: pd.DataFrame, max_gap: int = 5) -> pd.DataFrame:
     return filled.where(px.bfill().notna())
 
 
+def drop_stale(px: pd.DataFrame, max_zero_frac: float = 0.10):
+    """Drop tickers whose share of zero daily returns exceeds `max_zero_frac`.
+    S&P 500 members trade every day; long runs of unchanged prices mean Yahoo is serving
+    a different, illiquid security under a reused ticker (or stale quotes). Proxy for
+    GGR's "no days without trades" liquidity screen. Returns (clean_px, dropped_tickers)."""
+    r = px.pct_change(fill_method=None)
+    zero = (r == 0).sum() / r.notna().sum()
+    dropped = zero.index[zero > max_zero_frac].tolist()
+    return px.drop(columns=dropped), dropped
+
+
 def download_prices(tickers, start, end, chunk: int = 200) -> pd.DataFrame:
     """Daily dividend/split-adjusted closes from Yahoo Finance (a total-return proxy)."""
     import yfinance as yf

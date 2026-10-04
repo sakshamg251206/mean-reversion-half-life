@@ -51,3 +51,14 @@ def test_formation_universe_requires_membership_and_full_history():
     px.loc[idx[:5], "B"] = np.nan                   # B lists mid-window
     u = formation_universe(px, membership(), idx[0], idx[-1])
     assert u == ["A"]                               # C not a member on 2000-01-03, B incomplete
+
+
+def test_drop_stale_removes_securities_with_many_zero_returns():
+    idx = pd.bdate_range("2000-01-03", periods=100)
+    rng = np.random.default_rng(0)
+    live = 50 * np.exp(np.cumsum(rng.normal(0, 0.01, 100)))
+    stale = live.copy()
+    stale[::2] = np.roll(stale, 1)[::2]                 # every other day unchanged: 50% zero returns
+    px = pd.DataFrame({"LIVE": live, "STALE": stale}, index=idx)
+    out, dropped = data.drop_stale(px, max_zero_frac=0.10)
+    assert list(out.columns) == ["LIVE"] and dropped == ["STALE"]

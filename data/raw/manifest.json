@@ -1,0 +1,32 @@
+{
+  "data/raw/market.parquet": {
+    "sha256": "61304b9aef6afb3b71c5e79606e2de69ce1bf6f77b1f1121d0289f5adba71e8a",
+    "bytes": 128023,
+    "downloaded": "2026-10-04T19:56:06.405434+00:00"
+  },
+  "data/raw/prices_clean.parquet": {
+    "sha256": "53afb1ab86e7136d51b71407f2d33042520c3f1e494b4fa7d1374525cbc489e3",
+    "bytes": 16945302,
+    "downloaded": "2026-10-04T19:56:06.415903+00:00"
+  },
+  "data/raw/prices_raw.parquet": {
+    "sha256": "3f45a90a2584d334dde78c81c48a0fd8db38c22b6a0b1b2d5b7859fa54f6a50d",
+    "bytes": 25792370,
+    "downloaded": "2026-10-04T19:56:06.429854+00:00"
+  },
+  "data/raw/sp500_membership.csv": {
+    "sha256": "36326709d46d6cd25834de5df457b16f5f96fad3a06b9beac28f7b88aa0b0d54",
+    "bytes": 5530907,
+    "downloaded": "2026-10-04T19:56:06.436872+00:00"
+  },
+  "data/raw/usrec.csv": {
+    "sha256": "a42a3581fe9c260dd3627febc84a7d563e5ed162cc7085a7518ebde99dc3c3b4",
+    "bytes": 26829,
+    "downloaded": "2026-10-04T19:56:06.436972+00:00"
+  },
+  "data/raw/sectors_current.csv": {
+    "sha256": "8c8e14a61fe1ad4cb1d064832306ee98524ec481067192f31da792a2d0ffbe70",
+    "bytes": 9618,
+    "downloaded": "2026-10-04T19:56:06.437024+00:00"
+  }
+}

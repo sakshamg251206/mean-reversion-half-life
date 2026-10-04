@@ -1,6 +1,7 @@
 .remember/
 .venv/
-data/raw/
+data/raw/*
+!data/raw/manifest.json
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
