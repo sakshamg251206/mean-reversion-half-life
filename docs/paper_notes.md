@@ -57,8 +57,12 @@ Price" for close economic substitutes (pp. 800–801).
   \(w_{i,t} = (1 + r_{i,1}) \cdots (1 + r_{i,t-1})\); daily returns compounded to monthly.
 - Cash not in an open pair earns zero (conservative, fn. 5).
 - **Return on committed capital**: payoffs divided by the number of pairs
-  selected (e.g. 20). **Fully invested / employed capital**: payoffs divided by the
-  number of pairs that actually open during the trading period.
+  selected (e.g. 20). **Fully invested / employed capital**: the text says payoffs are
+  divided by "the number of pairs that open during the trading period", but eq. (2)
+  weights returns over open positions, and Table 1 (1.44% fully invested vs 0.81%
+  committed while 19.3 of 20 pairs open, open on average 3.76 of 6 months) is only
+  consistent with dividing by the capital in open positions *each day*. This
+  replication uses the daily definition.
 - A new portfolio starts every month; each calendar month's return is the average
   over the six overlapping portfolios (Jegadeesh & Titman 1993 overlap correction).
 - t-statistics: Newey–West with six lags.

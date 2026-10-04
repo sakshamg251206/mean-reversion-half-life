@@ -89,12 +89,14 @@ def test_portfolio_returns_costs_and_bases():
     assert np.allclose(employed, [-0.002, 0.01, 0.018])   # only one of two pairs ever opens
 
 
-def test_employed_divides_by_pairs_opened_during_period():
+def test_employed_divides_by_pairs_open_that_day():
+    # GGR eq. (2): fully-invested return = P&L over capital in open positions that day.
+    # Table 1 (1.44% vs 0.81% committed with 19.3/20 pairs opening) is only consistent with this.
     pnl = np.array([[0.0, 0.0], [0.01, 0.0], [0.0, 0.0]])
     legs = np.array([[2, 0], [0, 0], [2, 4]])            # pair 1 opens (and closes) on the last day
-    active = np.zeros((3, 2), dtype=bool)
+    active = np.array([[False, False], [True, False], [True, False]])
     _, employed = portfolio_returns(pnl, legs, active)
-    assert employed[1] == pytest.approx(0.005)            # GGR: divide by the 2 pairs that opened
+    assert employed[1] == pytest.approx(0.01)             # only pair 0 holds capital on day 1
 
 
 def test_monthly_compounds_then_averages_portfolios():

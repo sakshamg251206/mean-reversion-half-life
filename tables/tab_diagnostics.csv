@@ -1,0 +1,6 @@
+,value,top-20 only
+ADF rejects unit root (5%),0.5386,0.6073333333333333
+Engle-Granger rejects no-cointegration (5%),0.3728666666666667,0.471
+Johansen trace rejects rank 0 (5%),0.425,0.5063333333333333
+KPSS rejects stationarity (5%),0.4322,0.423
+Median variance ratio VR(10),0.6812380524592996,0.651823534419137

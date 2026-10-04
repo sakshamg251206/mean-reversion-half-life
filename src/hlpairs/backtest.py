@@ -87,18 +87,17 @@ def trade_ou(trade_px: pd.DataFrame, cand: pd.DataFrame, k: float = 2.0, wait: i
 
 
 def portfolio_returns(pnl, legs, active, cost_bps: float = 0.0, cols=None):
-    """Daily portfolio returns (GGR p.805). Committed capital: divide by all pairs selected.
-    Employed ("fully invested") capital: divide by the pairs that open at least once during
-    the trading period — an ex-post accounting convention, not a tradable signal.
-    Costs: cost_bps per leg traded, per $1 notional. `active` is kept for callers that
-    want daily exposure."""
+    """Daily portfolio returns. Committed capital: divide by all pairs selected.
+    Employed ("fully invested") capital: divide by the pairs holding a position (or
+    trading) that day — GGR eq. (2), where the portfolio return is weighted over open
+    positions. Costs: cost_bps per leg traded, per $1 notional."""
     if cols is not None:
         pnl, legs, active = pnl[:, cols], legs[:, cols], active[:, cols]
     net = (pnl - legs * cost_bps * 1e-4).sum(1)
     n = pnl.shape[1]
     committed = net / n if n else np.zeros(len(net))
-    opened = int((legs.sum(0) > 0).sum())
-    employed = net / opened if opened else np.zeros(len(net))
+    busy = (active | (legs > 0)).sum(1)
+    employed = np.divide(net, busy, out=np.zeros(len(net)), where=busy > 0)
     return committed, employed
 
 

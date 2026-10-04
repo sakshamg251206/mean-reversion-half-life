@@ -1,0 +1,18 @@
+\begin{tabular}{llrrrr}
+\toprule
+ &  & coef & se & t & p \\
+\midrule
+\multirow[t]{2}{*}{(1) HL rank} & const & 0.0280 & 0.0065 & 4.2923 & 0.0000 \\
+ & hl_rank & -0.0210 & 0.0064 & -3.2912 & 0.0010 \\
+\cline{1-6}
+\multirow[t]{3}{*}{(2) HL rank + SSD rank} & const & 0.0234 & 0.0062 & 3.7901 & 0.0002 \\
+ & hl_rank & -0.0226 & 0.0068 & -3.3123 & 0.0009 \\
+ & ssd_rank & 0.0109 & 0.0041 & 2.6217 & 0.0088 \\
+\cline{1-6}
+\multirow[t]{4}{*}{(3) log HL + SSD rank + EG p} & const & 0.0358 & 0.0114 & 3.1333 & 0.0017 \\
+ & log_hl & -0.0095 & 0.0047 & -2.0197 & 0.0434 \\
+ & ssd_rank & 0.0103 & 0.0043 & 2.3876 & 0.0170 \\
+ & eg_p & -0.0164 & 0.0088 & -1.8565 & 0.0634 \\
+\cline{1-6}
+\bottomrule
+\end{tabular}
