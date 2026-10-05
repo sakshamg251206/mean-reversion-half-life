@@ -2,7 +2,7 @@
 
 **A replication and extension of Gatev, Goetzmann & Rouwenhorst (2006) on point-in-time S&P 500 data, 2000–2025, testing whether a pair's mean-reversion half-life predicts its out-of-sample profits.**
 
-📄 **Paper:** [`paper/main.pdf`](paper/main.pdf) · 🧪 **Tests:** 44 unit tests (`make test`) · 🔒 **Holdout:** parameters frozen in [`experiments/frozen.yaml`](experiments/frozen.yaml) before a single out-of-sample run ([`results/holdout_record.yaml`](results/holdout_record.yaml))
+📄 **Paper:** [`paper/main.pdf`](paper/main.pdf) · 🧪 **Tests:** 44 unit tests (`make test`) · 🔒 **Holdout:** parameters frozen in [`experiments/frozen.yaml`](experiments/frozen.yaml) and committed before any out-of-sample evaluation ([`results/holdout_record.yaml`](results/holdout_record.yaml); see the paper §5.5 for what was seen when)
 
 > **Zenodo DOI:** will be added once the archive is published. No DOI exists yet.
 
@@ -60,7 +60,7 @@ flowchart LR
 - Every estimate (σ, β, half-lives, test statistics) uses formation-period data only.
 - [`test_no_lookahead`](tests/test_backtest.py) perturbs all prices after date *t* and asserts that every output up to *t* is unchanged.
 - [`test_formation_features_do_not_use_trading_data`](tests/test_engine.py) perturbs trading-period prices and asserts that all formation features are unchanged.
-- Five portfolios that start in August–December 2012, whose trading periods straddle the split, are excluded from both the development sample and the holdout.
+- Development = 150 portfolios starting 2000-01 to 2012-06; holdout = 151 starting 2013-01 to 2025-07; the 6 portfolios starting July–December 2012, whose trading periods straddle the split, are excluded from both.
 
 ## Dataset
 
@@ -170,7 +170,7 @@ docs/               reading notes, design spec, implementation plan
 
 - **Survivorship bias.** Yahoo is missing 426 historical members, which most likely inflates returns in 2000–2012.
 - **Narrower universe.** S&P 500 large caps only, not GGR's full CRSP cross-section.
-- **Sectors.** GICS sectors are current, not point-in-time.
+- **Sectors.** GICS sectors are current, not point-in-time; the sector-restricted portfolio is built only from stocks still in the index in 2025 (survivor-conditioned; reported for comparison only).
 - **Costs.** Linear costs only: no market impact and no short-borrow fees.
 - **Risk adjustment.** No factor-model regressions.
 - **Holdout.** A single holdout is one draw.

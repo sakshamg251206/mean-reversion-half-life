@@ -83,7 +83,7 @@ For stock $i$ let $P^i_t=\prod_{s\le t}(1+r^i_s)$ be the cumulative total-return
 \begin{equation}
 D_{ij}=\sum_{t\in\mathcal F}(P^i_t-P^j_t)^2 ,
 \end{equation}
-computed for all pairs at once from the Gram matrix. Portfolios hold the $N\in\{5,20\}$ lowest-$D$ pairs, a sector-restricted top-20, and 20 random pairs (seeded) as a baseline. During the six-month trading window, prices remain normalised to the formation start (as in GGR's Figure~1). A position opens at the close when $|P^i_t-P^j_t|>2\hat\sigma_{ij}$, where $\hat\sigma_{ij}$ is the formation-period standard deviation of the difference; it is \$1 long the lower and \$1 short the higher stock. It closes when the prices cross, when a leg stops trading (at its last price), or on the last trading day; pairs may re-open. In the wait-one-day variant every order executes at the next close.
+computed for all pairs at once from the Gram matrix. Portfolios hold the $N\in\{5,20\}$ lowest-$D$ pairs, a sector-restricted top-20 (survivor-conditioned; see Limitations), and 20 random pairs (seeded) as a baseline. During the six-month trading window, prices remain normalised to the formation start (as in GGR's Figure~1). A position opens at the close when $|P^i_t-P^j_t|>2\hat\sigma_{ij}$, where $\hat\sigma_{ij}$ is the formation-period standard deviation of the difference; it is \$1 long the lower and \$1 short the higher stock. It closes when the prices cross, when a leg stops trading (at its last price), or on the last trading day; pairs may re-open. In the wait-one-day variant every order executes at the next close.
 
 \textbf{Returns.} Inside a trade, legs are buy-and-hold, so the daily payoff per dollar committed is $\pi_t=s\,(a_{t-1}r^i_t-b_{t-1}r^j_t)$ with leg values $a,b$ compounding from one and $s=\pm1$. The \emph{committed-capital} return divides the portfolio payoff by the number of pairs selected; the \emph{employed-capital} return divides by the number of pairs with an open position that day (GGR's eq.~(2); the only definition consistent with their Table~1). Daily returns are compounded within months and averaged across the up to six overlapping portfolios started one month apart. Trading starts at the first trading day of each month from January 2000 to July 2025: 307 portfolios.
 
@@ -115,7 +115,7 @@ For each formation we keep the 100 lowest-SSD pairs, giving a panel of 30,700 pa
 \textbf{Quintile sorts}: within each formation, pairs are sorted into half-life quintiles; the time series of Q1 (fastest) minus Q5 (slowest) six-month returns is tested with Newey--West standard errors (six lags for the overlap). \textbf{Fama--MacBeth}: in each formation, regress pair returns on the cross-sectional percentile rank of half-life (robust to infinite half-lives), optionally with the SSD rank and the Engle--Granger $p$-value; average the slopes and use Newey--West errors.
 
 \subsection{Validation protocol}
-Portfolios starting no later than July 2012 form the \emph{development} sample (155 months); portfolios starting from January 2013 form the \emph{holdout} (156 months); the five portfolios starting August--December 2012, whose trading periods cross the boundary, are excluded from both. Every parameter choice---the half-life filter (H5) and the OU holding rule---was made on the development sample only, logged with all 24 variants tried, and written to \texttt{experiments/frozen.yaml}, which was committed to version control before the holdout script ran. The holdout script refuses to run if that file or the configuration has changed, and records the commit hash with its results. The one exception to ``holdout untouched'' is that the GGR replication (H1), which involves no choices, was computed on the full sample before the freeze; it informed no parameter.
+The 150 portfolios starting January 2000 to June 2012 form the \emph{development} sample (155 months of returns); the 151 portfolios starting from January 2013 form the \emph{holdout} (156 months); the six portfolios starting July--December 2012, whose trading periods cross the boundary, are excluded from both. (The configured cut-off, 2012-07-01, fell on a Sunday, so July 2012 belongs to the embargo.) Every parameter choice---the half-life filter (H5) and the OU holding rule---was made on the development sample only, logged with all 24 variants tried, and written to \texttt{experiments/frozen.yaml}, which was committed to version control before the holdout script ran. The holdout script refuses to run if that file or the configuration has changed, and records the commit hash with its results. Two departures from ``holdout untouched'' must be disclosed. The GGR replication (H1), which involves no choices, was computed on the full sample before the freeze. And the robustness script (Section~8) was run after the freeze but before the formal holdout script, so the holdout values in the parameter-sensitivity grid and cost curves---including those of the frozen half-life-filtered and OU strategies---were seen before Table~\ref{tab:holdout} was produced. Neither informed any parameter: all choices had already been committed.
 
 \textbf{Look-ahead checks.} Universe membership uses the formation-start snapshot; every estimate ($\hat\sigma$, $\beta$, half-lives, test statistics) uses formation data only; a unit test perturbs all prices after date $t$ and confirms every signal and P\&L up to $t$ is unchanged; a second test perturbs trading-period prices and confirms all formation features are unchanged.
 
@@ -125,7 +125,7 @@ Portfolios starting no later than July 2012 form the \emph{development} sample (
 Table~\ref{tab:replication} reports the GGR portfolios. In the development sample the top-20 portfolio earns 0.24\% per month on committed capital ($t=2.21$, annualised Sharpe 0.62), the top-5 0.19\% ($t=1.79$), the sector-restricted top-20 0.15\% ($t=1.91$) and random pairs 0.14\% ($t=0.56$) with three times the drawdown. In the holdout all four are indistinguishable from zero. Over the full period the top-20 earns 0.12\% per month ($t=1.92$) committed and 0.21\% ($t=2.12$) employed; with one-day-delayed execution, 0.10\% ($t=1.59$) and 0.16\% ($t=1.67$). For comparison, GGR report 0.81\% (committed, no wait) for 1962--2002 and 0.38\% (employed, wait one day) for 1989--2002. H1 is therefore only partly supported: returns are positive in 2000--2012 and close to GGR's late-sample level, but have vanished since 2013.
 
 \begin{table}[t]\centering\small
-\caption{GGR replication: monthly excess returns on committed capital, gross of costs, no waiting. $t$: Newey--West (6 lags). Sharpe annualised. Development sample: portfolios starting 2000-01 to 2012-07; holdout: 2013-01 to 2025-07.}
+\caption{GGR replication: monthly excess returns on committed capital, gross of costs, no waiting. $t$: Newey--West (6 lags). Sharpe annualised. Development sample: portfolios starting 2000-01 to 2012-06; holdout: 2013-01 to 2025-07.}
 \label{tab:replication}
 \begin{tabular}{llrrrrr}
 \toprule
@@ -191,7 +191,7 @@ Trading intensity is close to GGR's (19.4 of 20 pairs open, against 19.3; 1.50 r
 Formation half-lives are short and tightly distributed (Table~\ref{tab:hl}, Figure~\ref{fig:hldist}): the median OLS estimate on 252 days is 8.8 trading days, the Kendall correction raises it to 11.0 days, and the exact OU MLE gives 8.4 days. Estimators agree closely in rank (Figure~\ref{fig:agree}), except the 63-day window, which is noisier. Yet only 54\% of the top-100 spreads (61\% of the top-20) reject a unit root with ADF at 5\%, 37\% (47\%) reject no-cointegration with Engle--Granger, and 43\% fail KPSS (Figure~\ref{fig:diag}). SSD selects spreads that \emph{looked} stationary over one year; formally, about half of them are not distinguishable from random walks. The top pair in Figure~\ref{fig:example} is an example: ADF $p=0.22$, Engle--Granger $p=0.50$.
 
 \begin{table}[t]\centering\small
-\caption{Formation half-lives (trading days), development sample, top-100 SSD pairs per formation (15,100 pair-periods).}
+\caption{Formation half-lives (trading days), development sample, top-100 SSD pairs per formation (15,000 pair-periods).}
 \label{tab:hl}
 \begin{tabular}{lrrrr}
 \toprule
@@ -224,7 +224,7 @@ Realised in trading period (OLS) & 16.2 & & & \\
 \end{figure}
 
 \subsection{H3: is half-life persistent?}
-Barely. The Spearman correlation between formation half-life (OLS, 252 days) and the half-life realised in the following six months is 0.029 in the development sample---statistically different from zero only because of the 15,100 observations---and $-0.011$ ($p=0.19$) in the holdout. The median spread reverts at half the speed after selection (8.8 versus 16.2 days), and a sizeable mass of trading-period spreads does not revert at all (Figure~\ref{fig:persist}). Figure~\ref{fig:rollinghl} shows that even the pair most often ranked first (Freddie Mac/Fannie Mae) has a 126-day rolling half-life that swings between two and several hundred days. H3 is rejected in economic terms.
+Barely. The Spearman correlation between formation half-life (OLS, 252 days) and the half-life realised in the following six months is 0.029 in the development sample---statistically different from zero only because of the 15,000 observations---and $-0.011$ ($p=0.19$) in the holdout. The median spread reverts at half the speed after selection (8.8 versus 16.2 days), and a sizeable mass of trading-period spreads does not revert at all (Figure~\ref{fig:persist}). Figure~\ref{fig:rollinghl} shows that even the pair most often ranked first (Freddie Mac/Fannie Mae) has a 126-day rolling half-life that swings between two and several hundred days. H3 is rejected in economic terms.
 
 \begin{figure}[t]\centering
 \includegraphics[width=0.45\textwidth]{fig09_persistence.pdf}
@@ -237,7 +237,7 @@ Barely. The Spearman correlation between formation half-life (OLS, 252 days) and
 Despite the weak persistence, formation half-life sorts future returns strongly in 2000--2012 (Table~\ref{tab:h2dev}, Figure~\ref{fig:h2dev}). With the OLS 252-day estimator, Q1 pairs earn 2.40\% per six-month trading period and Q5 pairs 0.67\%; the spread of 1.74\% has $t=3.29$, and 1.52\% ($t=2.92$) net of 10~bp. The Kendall, OU-MLE and log-spread estimators give the same answer; the short 63-day window does not ($t=1.52$). In Fama--MacBeth regressions the half-life rank slope is $-0.021$ ($t=-3.29$), unchanged ($-0.023$, $t=-3.31$) when the SSD rank is added. Interestingly, the SSD rank enters \emph{positively} ($+0.011$, $t=2.62$): within the top 100, closer pairs do not earn more once speed is controlled for.
 
 \begin{table}[t]\centering\small
-\caption{H2, development sample: mean six-month pair return by formation half-life quintile (Q1 fastest), gross. $t$ for Q1$-$Q5, Newey--West (6 lags), 151 formations.}
+\caption{H2, development sample: mean six-month pair return by formation half-life quintile (Q1 fastest), gross. $t$ for Q1$-$Q5, Newey--West (6 lags), 150 formations.}
 \label{tab:h2dev}
 \begin{tabular}{lrrrrrrr}
 \toprule
@@ -294,7 +294,7 @@ Trade-start period & Formations & Q1$-$Q5 (\%) & $t$ (NW) & $p$ \\
 \midrule
 2000-01 -- 2007-06 & 90 & 1.56 & 2.69 & 0.007 \\
 2007-07 -- 2009-12 (crisis) & 30 & 3.35 & 2.27 & 0.023 \\
-2010-01 -- 2012-07 & 30 & 0.66 & 0.69 & 0.49 \\
+2010-01 -- 2012-06 & 30 & 0.66 & 0.69 & 0.49 \\
 2013-01 -- 2019-12 (holdout) & 84 & 0.38 & 0.91 & 0.37 \\
 2020-01 -- 2025-07 (holdout) & 67 & 0.34 & 0.58 & 0.56 \\
 \bottomrule
@@ -336,7 +336,7 @@ NBER & expansion & $-0.03$ & 1.03 & 284 \\
 
 \section{Out-of-Sample Results}
 
-Table~\ref{tab:holdout} reports the single holdout evaluation (2013--2025). For H2, the Q1$-$Q5 spread with the pre-specified OLS 252-day estimator is 0.36\% per six months ($t=1.04$, $p=0.30$), a fifth of its development value; net of costs it is 0.11\% ($t=0.31$). With the 63-day estimator selected for H5 it is negative ($-0.13\%$). The Fama--MacBeth half-life slope is $-0.0054$ ($t=-1.33$). Half-life persistence (H3) is $\rho=-0.011$. The half-life-filtered portfolio earns $-0.06\%$ per month net (Sharpe $-0.28$) versus $-0.09\%$ for GGR (Sharpe $-0.47$); the difference, 0.04\% per month, is insignificant ($t=1.00$, $p=0.32$). The OU strategy loses 0.31\% per month ($t=-4.57$). After Holm adjustment across the six holdout tests, the smallest adjusted $p$-value is 0.56 (Figure~\ref{fig:holdout}).
+Table~\ref{tab:holdout} reports the formal holdout evaluation (2013--2025). For H2, the Q1$-$Q5 spread with the pre-specified OLS 252-day estimator is 0.36\% per six months ($t=1.04$, $p=0.30$), a fifth of its development value; net of costs it is 0.11\% ($t=0.31$). With the 63-day estimator selected for H5 it is negative ($-0.13\%$). The Fama--MacBeth half-life slope is $-0.0054$ ($t=-1.33$). Half-life persistence (H3) is $\rho=-0.011$. The half-life-filtered portfolio earns $-0.06\%$ per month net (Sharpe $-0.28$) versus $-0.09\%$ for GGR (Sharpe $-0.47$); the difference, 0.04\% per month, is insignificant ($t=1.00$, $p=0.32$). The OU strategy loses 0.31\% per month ($t=-4.57$). After Holm adjustment across the six holdout tests, the smallest adjusted $p$-value is 0.56 (Figure~\ref{fig:holdout}).
 
 \begin{table}[t]\centering\small
 \caption{Holdout 2013--2025 (156 months), parameters frozen on 2000--2012. Panel A: hypothesis tests with Holm and Benjamini--Hochberg adjusted $p$-values. Panel B: portfolio performance, monthly.}
@@ -409,7 +409,7 @@ Two non-economic explanations must be weighed against this story, and our data c
 \item \textbf{Survivorship bias.} Yahoo Finance omits 426 of 1,117 historical members, so coverage rises from 44\% (1999) to 97\% (2025). The bias most likely inflates returns, especially in 2000--2012. A survivorship-free source (CRSP, or a vendor carrying delisted tickers) would be needed to remove it.
 \item \textbf{Universe.} Large-cap S\&P~500 stocks only, versus GGR's full CRSP cross-section; average universe 339 stocks.
 \item \textbf{Prices.} Adjusted closes approximate total returns; Yahoo adjustments occasionally contain errors; ticker re-use is mitigated, not eliminated, by spell masking and the stale-price screen.
-\item \textbf{Sectors.} GICS sectors are current, not point-in-time, and available only for current members.
+\item \textbf{Sectors.} GICS sectors are current, not point-in-time, and available only for stocks that are still index members today. The sector-restricted portfolio (Table~\ref{tab:replication}) and the same-sector share (Table~\ref{tab:tradestats}) are therefore built only from stocks that survived in the index to 2025 (79\% of the formation universe in 2000, 92\% in 2024)---a use of future information. They are reported for comparison with GGR only; no hypothesis test depends on them.
 \item \textbf{Costs.} A linear cost per leg-side; no market impact, no short-borrow fees or recalls, no financing spread on the short proceeds.
 \item \textbf{Risk adjustment.} We report raw excess returns; GGR's factor regressions (Fama--French, momentum, reversal) are not replicated.
 \item \textbf{Random-pairs baseline.} Uniformly random pairs, not GGR's bootstrap matched on prior-month return deciles.

@@ -72,8 +72,9 @@ Tiingo/EODHD/Norgate).
 
 - **Sectors are not point-in-time.** The Wikipedia list covers current constituents
   only, so sector-restricted pairs are formed only among stocks that are still members
-  today (an additional survivorship filter on that one variant) and use today's GICS
-  classification.
+  today (an additional survivorship filter on that one variant: 79% of the 2000 formation
+  universe has a sector, 92% in 2024) and use today's GICS classification. The sector
+  portfolio therefore uses future information and is reported for comparison only.
 - **Adjusted close ≈ total return.** Yahoo's dividend adjustment is multiplicative and
   occasionally contains errors; 50 daily returns exceed |50%| after cleaning, almost all
   attributable to real events (2008 financials, 2003 HealthSouth).
