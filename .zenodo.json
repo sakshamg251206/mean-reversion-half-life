@@ -1,0 +1,9 @@
+{
+  "title": "Does Faster Mean Reversion Predict Pairs-Trading Profits? Half-Life Evidence from a Replication of Gatev, Goetzmann and Rouwenhorst (2006)",
+  "upload_type": "software",
+  "description": "Code, paper (paper/main.pdf), figures, tables and results for a replication of the Gatev, Goetzmann & Rouwenhorst (2006) distance pairs-trading rule on point-in-time S&P 500 data (2000-2025), and a test of whether formation-period mean-reversion half-life predicts out-of-sample pair returns. Half-life predicts returns in the 2000-2012 development sample but fails a pre-specified 2013-2025 holdout. Yahoo Finance price data are not redistributed; scripts regenerate them.",
+  "creators": [{"name": "Garg, Saksham"}],
+  "license": "MIT",
+  "keywords": ["pairs trading", "statistical arbitrage", "mean reversion", "half-life", "Ornstein-Uhlenbeck", "replication", "out-of-sample"],
+  "related_identifiers": [{"identifier": "10.1093/rfs/hhj020", "relation": "isSupplementTo", "scheme": "doi", "resource_type": "publication-article"}]
+}
