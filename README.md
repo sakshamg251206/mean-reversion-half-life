@@ -4,7 +4,9 @@
 
 📄 **Paper:** [`paper/main.pdf`](paper/main.pdf) · 🧪 **Tests:** 44 unit tests (`make test`) · 🔒 **Holdout:** parameters frozen in [`experiments/frozen.yaml`](experiments/frozen.yaml) and committed before any out-of-sample evaluation ([`results/holdout_record.yaml`](results/holdout_record.yaml); see the paper §5.5 for what was seen when)
 
-> **Zenodo DOI:** will be added once the archive is published. No DOI exists yet.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23157543.svg)](https://doi.org/10.5281/zenodo.23157543)
+
+> **Archived on Zenodo:** [10.5281/zenodo.23157543](https://doi.org/10.5281/zenodo.23157543) (all versions) · v1.0.0: [10.5281/zenodo.23157544](https://doi.org/10.5281/zenodo.23157544)
 
 ---
 
@@ -185,11 +187,13 @@ Details are in the paper, §12.
   title  = {Does Faster Mean Reversion Predict Pairs-Trading Profits? Half-Life Evidence from a Replication of Gatev, Goetzmann and Rouwenhorst (2006)},
   year   = {2026},
   type   = {Working paper},
-  note   = {Code and data documentation: this repository}
+  version = {v1.0.0},
+  doi    = {10.5281/zenodo.23157544},
+  url    = {https://doi.org/10.5281/zenodo.23157544}
 }
 ```
 
-See also [`CITATION.cff`](CITATION.cff). Zenodo DOI: *pending — not yet published.*
+See also [`CITATION.cff`](CITATION.cff). Zenodo: [10.5281/zenodo.23157543](https://doi.org/10.5281/zenodo.23157543) (concept DOI, resolves to the latest version).
 
 ## License
 

@@ -6,6 +6,15 @@ authors:
   - family-names: Garg
     given-names: Saksham
 version: 1.0.0
+doi: 10.5281/zenodo.23157543
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23157543
+    description: Concept DOI (all versions)
+  - type: doi
+    value: 10.5281/zenodo.23157544
+    description: Version 1.0.0
+repository-code: "https://github.com/sakshamg251206/mean-reversion-half-life"
 date-released: 2026-10-05
 license: MIT
 keywords: [pairs trading, statistical arbitrage, mean reversion, half-life, Ornstein-Uhlenbeck, replication]
@@ -33,3 +42,4 @@ preferred-citation:
       given-names: Saksham
   title: "Does Faster Mean Reversion Predict Pairs-Trading Profits? Half-Life Evidence from a Replication of Gatev, Goetzmann and Rouwenhorst (2006)"
   year: 2026
+  doi: 10.5281/zenodo.23157544
